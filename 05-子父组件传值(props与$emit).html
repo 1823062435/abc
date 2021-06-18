@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="ttp">                                                 <!--(子传父) @aitemclick绑定aitemclick这个事件,然后调用bbitemclick这个方法 -->
+        <abc :product="productes" @aitemclick="bbitemclick"></abc> <!--(父传子)在调用时候要绑定数据,将props里创建好的product的值绑定父类组件productes的值 -->
+    </div>
+
+    <template id="abc">
+        <div>
+            <button v-for="item in product" @click="itemclick(item)">{{item.name}}</button>
+        </div>
+    </template>
+
+    <script>
+        const abc = {
+            template: '#abc',
+            props: {
+                product: {
+                    type: Array,                      //(父传子)通过props属性将父类传来的值接受,设定为数组
+                    default() {                       //(父传子)当父类没传值所使用的默认值，这里使用函数调用是因为返回的是一个数组
+                        return []
+                    }
+                }
+            },
+            methods: {
+                itemclick(item) {
+                   this.$emit("aitemclick",item.id)      //(子传父)从子类发送事件,事件名字为aitemclick,参数为item
+                }
+            }
+
+        }
+
+        new Vue({
+            el: '#ttp',
+            data: {
+                productes:
+                    [
+                        { id: 1, name: '热门产品' },
+                        { id: 2, name: '水果饮食' },
+                        { id: 3, name: '电子设备' },
+                        { id: 4, name: '家用电器' },
+                    ]
+            },
+            components: {
+                abc
+            },
+            methods: {
+                bbitemclick(item){                  //(子传父)默认接受子类传来的参数
+                    console.log(item)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

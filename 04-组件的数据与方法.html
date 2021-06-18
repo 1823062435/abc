@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="abc">
+        <pcn></pcn>
+        <pcn></pcn>
+        <pcn></pcn>
+    </div>
+   <template id="ttp">                          <!--  记得用template里面要用一个div包起来 -->
+    <div>
+       <h2>此时的值为:{{count}}</h2>
+       <button @click="increase">+</button>
+       <button @click="decrease">-</button>
+    </div>
+   </template>
+<script>
+    Vue.component('pcn',{
+     template:'#ttp',
+     data(){                             //使用的是一个函数而不是对象
+         return {
+             count:0
+        }
+    },
+     methods: {                         //方法还是和vue实例一样
+         increase(){
+             this.count++;
+         },
+         decrease(){
+            this.count--;
+         }
+     }
+    })
+
+
+    new Vue({
+       el:"#abc"
+    })
+</script>
+</body>
+
+</html>

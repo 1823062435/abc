@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+         <!-- 写死的,不太好 -->
+<div id="abc">
+    性别:
+  <label for="mal">
+      <input type="radio" id="mal" value="男" v-model="ule">男
+  </label>
+  <label for="mal">
+    <input type="radio" id="mal" value="女" v-model="ule">女
+</label>
+<h4>你的性别:{{ule}}</h4>
+
+<h1></h1>
+<select name="" id="" v-model="fruit">
+    <option value="苹果">苹果</option>
+    <option value="香蕉">香蕉</option>
+    <option value="葡萄">葡萄</option>
+    <option value="菠萝">菠萝</option>
+</select>
+<h4>你喜欢的水果为:{{fruit}}</h4>
+   
+
+       <!-- 值绑定思想,也就是value绑定值,多用 -->
+   <label for="" v-for="item in football">
+     <input type="checkbox" :value="item" v-model="abt">{{item}}
+   </label>
+   <h1></h1>
+   <span style="font-weight: 800;">你的喜欢的运动是:</span>
+   <span style="font-weight: 800;" v-for="item in abt">{{item}}</span>
+   <h1></h1>
+   <input type="text"  v-model="content">
+   <h1></h1>
+   <span style="font-weight: 800;">你输入的是:{{content}}</span>
+</div>
+
+
+
+
+
+<script>
+  new Vue({
+     el:'#abc',
+     data:{
+       ule:'男',
+       abt:[],
+       fruit:'菠萝',
+       football:['足球 ','篮球 ','羽毛球 ','兵乓球 '],
+       content:''
+     }
+  })
+</script>
+</body>
+</html>

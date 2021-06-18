@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <template id="abc">
+        <div>
+            <h1>我是标题</h1>
+            <p>我是内容</p>
+            <p>哈哈哈哈哈</p>
+        </div>
+    </template>
+
+    <div id="app">
+        <cpn></cpn> <!-- 3、使用组件 -->
+        <cpn></cpn>
+        <cpn></cpn>
+       
+    </div>
+  
+    <script>
+        //1、创建组件构造器对象，其中template是其中的模板属性，而这个`  `  是es6的语法，也是字符串符号，但是可以换行写字符串符号。
+        //非语法糖,少用
+        // const cpt = Vue.extend({
+        //      template:"#abc"    })
+        //2、注册全局组件,少用,前面为组件名字,后面为之前定义的模版组件
+        //Vue.component('cp-n', cpt)
+        //语法糖形式,,不用第一步
+        // Vue.component('cpn', {
+        //     template: "#abc"
+        // })
+
+        new Vue({
+            el: '#app',
+            data: {
+            },
+            components: {
+                cpn: {                          //2、注册局部组件,,不用第一步,语法糖形式,只能在当前vue事例下使用,经常用
+                    template: "#abc"                               
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

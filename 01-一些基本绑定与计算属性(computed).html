@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../vue.js"></script>
+  <style>
+    table {
+      border: 1px solid black;
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+
+    th,
+    td {
+      border: 1px solid black;
+      padding: 8px 16px;
+    }
+
+    th {
+      background-color: rgb(233, 225, 225);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div v-if="abc.length" >
+      <table>
+        <thead>
+          <tr>
+            <th>书籍名称</th>
+            <th>出版日期</th>
+            <th>价格</th>
+            <th>购买数量</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item,index) in abc">
+            <td>{{item.name}}</td>
+            <td>{{item.datae}}</td>
+            <td>{{item.price | showPrice}}</td>
+            <td>
+              <button @click="decrease(index)" :disabled="item.num <= 1">-</button>
+              {{item.num}}
+              <button @click="increase(index)">+</button>
+            </td>
+            <td>
+              <button @click="deletee(index)">移除</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="font-size: 26px;font-weight: 600;">总价格为:{{abcd}}</div>
+      
+    </div>
+    <div v-else style="font-size: 34px;font-weight: 600;">
+      购物车没有物品
+    </div>
+  </div>
+
+
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        abc: [
+          { name: "<算法导论>", datae: "2006-9", price: 86, num: 1 },
+          { name: "<c#>", datae: "2004-9", price: 96, num: 1 },
+          { name: "<代码大全>", datae: "2006-11", price: 56, num: 1 },
+          { name: "<linux>", datae: "2011-11", price: 98, num: 1 },
+        ],
+      },
+      methods: {
+        increase(index) {
+          this.abc[index].num += 1;
+        },
+        decrease(index) {
+          this.abc[index].num -= 1;
+        },
+        deletee(index) {
+          this.abc.splice(index, 1)
+        }
+
+      },
+      computed: {                           //计算属性,abcd(){}实质上是使用了回调函数get()即abcd(){get(){return}},在html里可以直接用{{函数名}}调用
+        abcd() {                            //只会计算一次,可以提高效率
+          let i, coutt = 0;
+          for (i = 0; i < this.abc.length; i++)
+            coutt += this.abc[i].price * this.abc[i].num;
+          return coutt
+        }
+      },
+      filters: {
+        showPrice(price) {
+          return '￥' + price.toFixed(2)
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

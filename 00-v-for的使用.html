@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../vue.js"></script>
+  <style>
+    .re{
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="abc">
+     <ul v-for="(item,index) in movies" :class="index === indexchange?'re':''"  @click="panduan(index)">
+       <li>{{item}}</li>
+     </ul>
+  </div>
+
+
+  <script>
+    new Vue({
+      el: '#abc',
+      data: {
+        movies: ['海王', '我不是药神', '赌神', '西红柿首富'],
+        indexchange:0
+      },
+      methods: {
+        panduan(index){
+            this.indexchange = index;
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
